@@ -1,5 +1,3 @@
-use std::ops::Neg;
-
 fn main() {
     let mut v = Vector::new();
 
@@ -36,7 +34,6 @@ impl Vector {
         for index in 0..self.tabel.len() {
             if self.tabel[index]<value {
                 pozitie+=1;
-                println!("pos {}", pozitie);
             }
         }
 
