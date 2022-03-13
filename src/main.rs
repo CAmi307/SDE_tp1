@@ -17,6 +17,11 @@ fn main() {
 
     v.display();
 
+    let nr_prime: Vector = v.prime_numbers();
+    let interval: Vector = v.between(2, 7);
+
+    nr_prime.display();
+    interval.display();
 }
 
 struct Vector {
@@ -29,11 +34,11 @@ impl Vector {
     }
 
     fn add(&mut self, value: i32) {
-        let mut pozitie:usize = 0;
+        let mut pozitie: usize = 0;
 
         for index in 0..self.tabel.len() {
-            if self.tabel[index]<value {
-                pozitie+=1;
+            if self.tabel[index] < value {
+                pozitie += 1;
             }
         }
 
@@ -49,32 +54,30 @@ impl Vector {
         }
 
         match pozitie {
-            Some(pozitie) => { self.tabel.remove(pozitie); },
-            None =>  println!("Valoarea introdusa nu exista in vector!")
+            Some(pozitie) => {
+                self.tabel.remove(pozitie);
+            }
+            None => println!("Valoarea introdusa nu exista in vector!"),
         }
-        
     }
 
     fn display(&self) {
         for index in 0..self.tabel.len() {
-            print!("{} ",self.tabel[index]);
+            print!("{} ", self.tabel[index]);
         }
     }
 
-    //returneaza nr prime in tablou
-    fn prime_numbers(&self) -> Vector{
+    fn prime_numbers(&self) -> Vector {
         let mut aux = Vector::new();
 
         for element in &self.tabel {
-            
             let mut prim = true;
-            
+
             if element <= &1 {
                 prim = false;
-            }
-            else {
+            } else {
                 for index in 2..*element {
-                    if element%index == 0 {
+                    if element % index == 0 {
                         prim = false;
                     }
                 }
@@ -82,27 +85,43 @@ impl Vector {
 
             if prim {
                 aux.add(*element);
-            } 
+            }
         }
 
         return aux;
     }
+
+    fn between(&self, mut min: i32, mut max: i32) -> Vector {
+        let mut v = Vector::new();
+
+        if min > max {
+            let aux = min;
+            min = max;
+            max = aux;
+        }
+
+        for element in &self.tabel {
+            if element >= &min && element <= &max {
+                v.add(*element);
+            }
+        }
+
+        return v;
+    }
 }
 
-/* 
 #[cfg(test)]
 mod tests {
     use super::*;
- 
-    #[test]
-    fn it_adds(){
-        let mut v = Vector::new();
 
+    #[test]
+    fn it_adds() {
+        let mut v = Vector::new();
+        
         v.add(3);
         v.add(2);
 
-        assert!(v.tabel[0]<v.tabel[1]);
-
+        assert!(v.tabel[0] == 2 && v.tabel[1] == 3);
     }
 
     #[test]
@@ -129,10 +148,21 @@ mod tests {
         let prime = v.prime_numbers();
 
         assert!(prime.tabel[0] == 2 && prime.tabel[1] == 3 && prime.tabel[2] == 5);
-
     }
 
+    #[test]
+    fn is_between() {
+        let mut v = Vector::new();
 
+        v.add(1);
+        v.add(2);
+        v.add(3);
+        v.add(4);
+        v.add(5);
+        v.add(6);
+
+        let new = v.between(2, 3);
+
+        assert!(new.tabel[0] >= 2 && new.tabel[new.tabel.len() - 1] <= 3);
+    }
 }
-
-*/
