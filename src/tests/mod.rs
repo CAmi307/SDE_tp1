@@ -7,7 +7,7 @@ fn it_adds() {
     v.add(3);
     v.add(2);
 
-    assert!(v.tabel[0] < v.tabel[1]);
+    assert_eq!(v.tabel, vec![2,3]);
 }
 
 #[test]
@@ -18,7 +18,7 @@ fn it_removes() {
     v.add(5);
     v.remove(5);
 
-    assert_eq!(v.tabel, vec![2, 3])
+    assert_eq!(v.tabel, vec![7])
 }
 
 #[test]

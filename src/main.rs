@@ -74,7 +74,7 @@ impl Vector {
         for element in &self.tabel {
             let mut prim = true;
 
-            if *element < 1 {
+            if *element <= 1 {
                 prim = false;
             } else {
                 for index in 2..*element {
