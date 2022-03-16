@@ -1,7 +1,7 @@
 use crate::Vector;
 
 #[test]
-fn it_adds1() {
+fn it_adds() {
     let mut v = Vector::new();
 
     v.add(3);
@@ -18,7 +18,7 @@ fn it_removes() {
     v.add(5);
     v.remove(5);
 
-    assert_ne!(v.tabel[0], 5);
+    assert_eq!(v.tabel, vec![2, 3])
 }
 
 #[test]

@@ -50,7 +50,7 @@ impl Vector {
 
         for index in 0..self.tabel.len() {
             if self.tabel[index] == value {
-                pozitie = Some(index);
+                pozitie = Some(index); 
             }
         }
 
@@ -74,7 +74,7 @@ impl Vector {
         for element in &self.tabel {
             let mut prim = true;
 
-            if element <= &1 {
+            if *element < 1 {
                 prim = false;
             } else {
                 for index in 2..*element {
@@ -102,7 +102,7 @@ impl Vector {
         }
 
         for element in &self.tabel {
-            if element >= &min && element <= &max {
+            if *element >= min && *element <= max {
                 v.add(*element);
             }
         }
